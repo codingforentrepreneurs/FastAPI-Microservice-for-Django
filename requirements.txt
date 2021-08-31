@@ -4,3 +4,4 @@ uvicorn
 jinja2
 pytest
 requests
+pre-commit
