@@ -11,6 +11,7 @@ from fastapi import(
     File,
     UploadFile
     )
+import pytesseract
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseSettings
@@ -44,8 +45,15 @@ def home_view(request: Request, settings:Settings = Depends(get_settings)):
 
 
 @app.post("/") # http POST
-def home_detail_view():
-    return {"hello": "world"}
+async def prediction_view(file:UploadFile = File(...), settings:Settings = Depends(get_settings)):
+    bytes_str = io.BytesIO(await file.read())
+    try:
+        img = Image.open(bytes_str)
+    except:
+        raise HTTPException(detail="Invalid image", status_code=400)
+    preds = pytesseract.image_to_string(img)
+    predictions = [x for x in preds.split("\n")]
+    return {"results": predictions, "original": preds}
 
 
 @app.post("/img-echo/", response_class=FileResponse) # http POST
