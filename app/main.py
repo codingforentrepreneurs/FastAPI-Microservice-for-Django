@@ -30,7 +30,9 @@ settings = get_settings()
 DEBUG=settings.debug
 
 BASE_DIR = pathlib.Path(__file__).parent
-UPLOAD_DIR = BASE_DIR / "uploaded"
+UPLOAD_DIR = BASE_DIR / "uploads"
+
+
 app = FastAPI()
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
@@ -49,6 +51,7 @@ def home_detail_view():
 async def img_echo_view(file:UploadFile = File(...), settings:Settings = Depends(get_settings)):
     if not settings.echo_active:
         raise HTTPException(detail="Invalid endpoint", status_code=400)
+    UPLOAD_DIR.mkdir(exist_ok=True)
     bytes_str = io.BytesIO(await file.read())
     fname = pathlib.Path(file.filename)
     fext = fname.suffix # .jpg, .txt
