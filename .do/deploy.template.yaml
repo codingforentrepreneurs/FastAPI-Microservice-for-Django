@@ -7,9 +7,8 @@ spec:
       repo_clone_url: https://github.com/codingforentrepreneurs/FastAPI-Microservice-for-Django.git
     envs:
     - key: DEBUG
-      value: 0
-      type: SECRET
+      value: "0"
     - key: ECHO_ACTIVE
-      scope: 0
+      value: "0"
     - key: APP_AUTH_TOKEN
       value: "CHANGE_AND_ENCRYPT_ME"
