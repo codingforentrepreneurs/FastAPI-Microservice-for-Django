@@ -1,7 +1,7 @@
 spec:
-  name: docker-fastapi-ocr
+  name: ocr-microservice
   services:
-  - name: cfe-ocr-microservice
+  - name: web
     dockerfile_path: Dockerfile
     instance_count: 1
     instance_size_slug: basic-xxs
