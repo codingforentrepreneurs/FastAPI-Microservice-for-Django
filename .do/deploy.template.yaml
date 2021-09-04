@@ -1,0 +1,15 @@
+spec:
+  name: docker-fastapi-ocr
+  services:
+  - name: web
+    git:
+      branch: main
+      repo_clone_url: https://github.com/codingforentrepreneurs/FastAPI-Microservice-for-Django.git
+    envs:
+    - key: DEBUG
+      value: 0
+      type: SECRET
+    - key: ECHO_ACTIVE
+      scope: 0
+    - key: APP_AUTH_TOKEN
+      value: "CHANGE_AND_ENCRYPT_ME"
