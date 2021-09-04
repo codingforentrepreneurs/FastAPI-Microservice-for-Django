@@ -1,7 +1,13 @@
 spec:
   name: docker-fastapi-ocr
   services:
-  - name: web
+  - name: cfe-ocr-microservice
+    dockerfile_path: Dockerfile
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
+    source_dir: /
     git:
       branch: main
       repo_clone_url: https://github.com/codingforentrepreneurs/FastAPI-Microservice-for-Django.git
